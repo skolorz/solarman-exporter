@@ -64,8 +64,16 @@ main! = |_args|
     decoder = Json.utf8_with({ field_name_mapping: PascalCase })
 
     year_respone = (fetch_year! { year })?
-    day_record = Decode.from_bytes(year_respone.body, decoder)?
+    year_record = Decode.from_bytes(year_respone.body, decoder)?
 
+    month_response = (fetch_month! { year, month })?
+    month_record = Decode.from_bytes(month_response.body, decoder)?
+
+    day_response = (fetch_day! { year, month, day })?
+    day_record = Decode.from_bytes(day_response.body, decoder)?
+
+    Stdout.line!("Year ${year_record}")?
+    Stdout.line!("Month ${month_record}")?
     Stdout.line!("Day ${day_record}")
 
 # Day structure - contains detailed records for each timestamp
