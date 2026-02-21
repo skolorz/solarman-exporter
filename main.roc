@@ -23,9 +23,12 @@ fetch! = |uri|
         },
     )
 
-write_respone_to_file = |response, out_file_name|
+write_respone_to_file! = |response, out_file_name|
     body_str = (Str.from_utf8(response.body))?
     File.write_utf8!(body_str, out_file_name) |> dbg
+
+fetch_year! = |{ year }|
+    fetch! "https://home.solarmanpv.com/maintain-s/history/power/1387806/stats/year?year=${year}"
 
 fetch_month! = |{ year, month }|
     fetch! "https://home.solarmanpv.com/maintain-s/history/power/1387806/stats/month?year=${year}&month=${month}"
@@ -38,5 +41,17 @@ main! = |_args|
     month = "1"
     day = "13"
 
-    day_response = (fetch_day! { year, month, day })?
-    write_respone_to_file day_response "./out/day_${year}_${month}_${day}.json"
+    (
+        (fetch_day! { year, month, day })?
+        |> write_respone_to_file! "./out/day_${year}_${month}_${day}.json"
+    )?
+
+    (
+        (fetch_month! { year, month })?
+        |> write_respone_to_file! "./out/month_${year}_${month}.json"
+    )?
+
+    (
+        (fetch_year! { year })?
+        |> write_respone_to_file! "./out/year_${year}.json"
+    )
