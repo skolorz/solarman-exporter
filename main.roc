@@ -6,9 +6,12 @@ app [main!] {
 import pf.Stdout
 import json.Json
 import Solarman exposing [Year, Month, Day, fetch_day!, fetch_month!, fetch_year!]
-# Data structures for SolarMan API responses
+import Repository exposing [initialize!]
 
 main! = |_args|
+    db = "./out/solarman.db"
+    (Repository.initialize! db)?
+
     year = "2026"
     month = "1"
     day = "13"
@@ -24,6 +27,7 @@ main! = |_args|
     day_response = (fetch_day! { year, month, day })?
     day_record = Decode.from_bytes(day_response.body, decoder)?
 
-    Stdout.line!("Year ${year_record}")?
-    Stdout.line!("Month ${month_record}")?
-    Stdout.line!("Day ${day_record}")
+    Repository.insert_day_statistics! db day_record |> dbg
+# Stdout.line!("Year ${year_record}")?
+# Stdout.line!("Month ${month_record}")?
+# Stdout.line!("Day ${day_record}")
