@@ -6,8 +6,7 @@
     "sunrise": 1769926760,
     "sunset": 1769960293,
     "weatherPicName": "Pochmurny",
-    "sunshineDuration": 33533,
-    "timeZoneOffset": null
+    "sunshineDuration": 33533
   },
   {
     "datetime": 1770026400,
@@ -16,8 +15,7 @@
     "sunrise": 1770013074,
     "sunset": 1770046797,
     "weatherPicName": "Pochmurny",
-    "sunshineDuration": 33723,
-    "timeZoneOffset": null
+    "sunshineDuration": 33723
   },
   {
     "datetime": 1770112800,
@@ -26,8 +24,7 @@
     "sunrise": 1770099386,
     "sunset": 1770133301,
     "weatherPicName": "Śnieżny",
-    "sunshineDuration": 33915,
-    "timeZoneOffset": null
+    "sunshineDuration": 33915
   },
   {
     "datetime": 1770199200,
@@ -36,8 +33,7 @@
     "sunrise": 1770185696,
     "sunset": 1770219805,
     "weatherPicName": "Śnieżny",
-    "sunshineDuration": 34109,
-    "timeZoneOffset": null
+    "sunshineDuration": 34109
   },
   {
     "datetime": 1770285600,
@@ -46,8 +42,7 @@
     "sunrise": 1770272004,
     "sunset": 1770306309,
     "weatherPicName": "Pochmurny",
-    "sunshineDuration": 34305,
-    "timeZoneOffset": null
+    "sunshineDuration": 34305
   },
   {
     "datetime": 1770372000,
@@ -56,8 +51,7 @@
     "sunrise": 1770358310,
     "sunset": 1770392813,
     "weatherPicName": "Mży",
-    "sunshineDuration": 34503,
-    "timeZoneOffset": null
+    "sunshineDuration": 34503
   },
   {
     "datetime": 1770458400,
@@ -66,8 +60,7 @@
     "sunrise": 1770444615,
     "sunset": 1770479318,
     "weatherPicName": "Mży",
-    "sunshineDuration": 34703,
-    "timeZoneOffset": null
+    "sunshineDuration": 34703
   },
   {
     "datetime": 1770544800,
@@ -76,8 +69,7 @@
     "sunrise": 1770530918,
     "sunset": 1770565822,
     "weatherPicName": "Śnieżny",
-    "sunshineDuration": 34904,
-    "timeZoneOffset": null
+    "sunshineDuration": 34904
   },
   {
     "datetime": 1770631200,
@@ -86,8 +78,7 @@
     "sunrise": 1770617219,
     "sunset": 1770652327,
     "weatherPicName": "Pochmurny",
-    "sunshineDuration": 35108,
-    "timeZoneOffset": null
+    "sunshineDuration": 35108
   },
   {
     "datetime": 1770717600,
@@ -96,8 +87,7 @@
     "sunrise": 1770703519,
     "sunset": 1770738831,
     "weatherPicName": "Pochmurny",
-    "sunshineDuration": 35312,
-    "timeZoneOffset": null
+    "sunshineDuration": 35312
   },
   {
     "datetime": 1770804000,
@@ -106,8 +96,7 @@
     "sunrise": 1770789817,
     "sunset": 1770825335,
     "weatherPicName": "Mży",
-    "sunshineDuration": 35518,
-    "timeZoneOffset": null
+    "sunshineDuration": 35518
   },
   {
     "datetime": 1770890400,
@@ -116,8 +105,7 @@
     "sunrise": 1770876113,
     "sunset": 1770911840,
     "weatherPicName": "Mży",
-    "sunshineDuration": 35727,
-    "timeZoneOffset": null
+    "sunshineDuration": 35727
   },
   {
     "datetime": 1770976800,
@@ -126,8 +114,7 @@
     "sunrise": 1770962408,
     "sunset": 1770998344,
     "weatherPicName": "Mży",
-    "sunshineDuration": 35936,
-    "timeZoneOffset": null
+    "sunshineDuration": 35936
   },
   {
     "datetime": 1771063200,
@@ -136,8 +123,7 @@
     "sunrise": 1771048702,
     "sunset": 1771084848,
     "weatherPicName": "Śnieżny",
-    "sunshineDuration": 36146,
-    "timeZoneOffset": null
+    "sunshineDuration": 36146
   },
   {
     "datetime": 1771149600,
@@ -146,8 +132,7 @@
     "sunrise": 1771134994,
     "sunset": 1771171352,
     "weatherPicName": "Śnieżny",
-    "sunshineDuration": 36358,
-    "timeZoneOffset": null
+    "sunshineDuration": 36358
   },
   {
     "datetime": 1771236000,
@@ -156,8 +141,7 @@
     "sunrise": 1771221285,
     "sunset": 1771257856,
     "weatherPicName": "Śnieżny",
-    "sunshineDuration": 36571,
-    "timeZoneOffset": null
+    "sunshineDuration": 36571
   },
   {
     "datetime": 1771322400,
@@ -166,8 +150,7 @@
     "sunrise": 1771307575,
     "sunset": 1771344359,
     "weatherPicName": "Śnieżny",
-    "sunshineDuration": 36784,
-    "timeZoneOffset": null
+    "sunshineDuration": 36784
   },
   {
     "datetime": 1771408800,
@@ -176,8 +159,7 @@
     "sunrise": 1771393863,
     "sunset": 1771430862,
     "weatherPicName": "Śnieżny",
-    "sunshineDuration": 36999,
-    "timeZoneOffset": null
+    "sunshineDuration": 36999
   },
   {
     "datetime": 1771495200,
@@ -186,8 +168,7 @@
     "sunrise": 1771480150,
     "sunset": 1771517365,
     "weatherPicName": "Pochmurny",
-    "sunshineDuration": 37215,
-    "timeZoneOffset": null
+    "sunshineDuration": 37215
   },
   {
     "datetime": 1771581600,
@@ -196,8 +177,7 @@
     "sunrise": 1771566436,
     "sunset": 1771603868,
     "weatherPicName": "Pochmurny",
-    "sunshineDuration": 37432,
-    "timeZoneOffset": null
+    "sunshineDuration": 37432
   },
   {
     "datetime": 1771668000,
@@ -206,7 +186,6 @@
     "sunrise": 1771652721,
     "sunset": 1771690371,
     "weatherPicName": "Śnieżny",
-    "sunshineDuration": 37650,
-    "timeZoneOffset": null
+    "sunshineDuration": 37650
   }
 ]
