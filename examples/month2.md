@@ -14,7 +14,6 @@ The JSON file is an array of objects, where each object represents a day's weath
 - **`sunset`**: Unix timestamp for sunset (e.g., `1769960293`).
 - **`weatherPicName`**: Localized weather condition name (e.g., `Pochmurny` for "Cloudy" in Polish).
 - **`sunshineDuration`**: Duration of sunshine in seconds (e.g., `33533`).
-- **`timeZoneOffset`**: Time zone offset (can be `null`).
 
 ## Example
 ```json
@@ -27,7 +26,6 @@ The JSON file is an array of objects, where each object represents a day's weath
     "sunset": 1769960293,
     "weatherPicName": "Pochmurny",
     "sunshineDuration": 33533,
-    "timeZoneOffset": null
   },
   {
     "datetime": 1770026400,
@@ -37,7 +35,6 @@ The JSON file is an array of objects, where each object represents a day's weath
     "sunset": 1770046797,
     "weatherPicName": "Pochmurny",
     "sunshineDuration": 33723,
-    "timeZoneOffset": null
   }
 ]
 ```
@@ -46,4 +43,3 @@ The JSON file is an array of objects, where each object represents a day's weath
 - The `datetime` field is a Unix timestamp and can be converted to a human-readable date using standard libraries.
 - The `weatherPic` field provides a general weather condition, while `weatherPicName` provides a localized description.
 - The `sunshineDuration` field is in seconds and can be converted to hours by dividing by `3600`.
-- The `timeZoneOffset` field is typically `null` and may not be populated in all records.
