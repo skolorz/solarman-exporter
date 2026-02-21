@@ -3,59 +3,10 @@ app [main!] {
     json: "https://github.com/lukewilliamboswell/roc-json/releases/download/0.13.0/RqendgZw5e1RsQa3kFhgtnMP8efWoqGRsAvubx4-zus.tar.br",
 }
 
-import pf.Http
-import pf.File
 import pf.Stdout
 import json.Json
-import Solarman
+import Solarman exposing [Year, Month, Day, fetch_day!, fetch_month!, fetch_year!]
 # Data structures for SolarMan API responses
-
-fetch! = |uri|
-    authToken = Str.trim(File.read_utf8!("./auth_token")?)
-
-    headers = [
-        Http.header(("accept", "application/json")),
-        Http.header(("authorization", authToken)),
-    ]
-
-    Http.send!(
-        {
-            method: GET,
-            headers: headers,
-            uri,
-            body: [],
-            timeout_ms: TimeoutMilliseconds(5000),
-        },
-    )
-
-write_respone_to_file! = |response, out_file_name|
-    body_str = (Str.from_utf8(response.body))?
-    File.write_utf8!(body_str, out_file_name) |> dbg
-
-fetch_year! = |{ year }|
-    fetch! "https://home.solarmanpv.com/maintain-s/history/power/1387806/stats/year?year=${year}"
-
-fetch_month! = |{ year, month }|
-    fetch! "https://home.solarmanpv.com/maintain-s/history/power/1387806/stats/month?year=${year}&month=${month}"
-
-fetch_day! = |{ year, month, day }|
-    fetch! "https://home.solarmanpv.com/maintain-s/history/power/1387806/record?year=${year}&month=${month}&day=${day}"
-
-fetch_and_write_examples! = |{ year, month, day }|
-    (
-        (fetch_day! { year, month, day })?
-        |> write_respone_to_file! "./out/day_${year}_${month}_${day}.json"
-    )?
-
-    (
-        (fetch_month! { year, month })?
-        |> write_respone_to_file! "./out/month_${year}_${month}.json"
-    )?
-
-    (
-        (fetch_year! { year })?
-        |> write_respone_to_file! "./out/year_${year}.json"
-    )
 
 main! = |_args|
     year = "2026"
