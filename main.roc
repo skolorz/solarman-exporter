@@ -24,9 +24,17 @@ fetch! = |uri|
         },
     )
 
-main! = |_args|
+fetch_day! = |{ year, month, day }|
+    fetch! "https://home.solarmanpv.com/maintain-s/history/power/1387806/record?year=${year}&month=${month}&day=${day}"
 
-    response = (fetch! "https://home.solarmanpv.com/maintain-s/history/power/1387806/record?year=2026&month=1&day=13")?
+main! = |_args|
+    year = "2026"
+    month = "1"
+    day = "13"
+    response = (fetch_day! { year, month, day })?
     body_str = (Str.from_utf8(response.body))?
 
-    Stdout.line!("Response body:\n\t${body_str}.\n")
+    out_file_name = "./out/day_${year}_${month}_${day}.json"
+    dbg out_file_name
+    File.write_utf8!(body_str, out_file_name)
+# Stdout.line!("Done")
