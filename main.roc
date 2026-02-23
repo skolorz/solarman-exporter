@@ -14,9 +14,7 @@ store! = |db|
     month = "1"
     day = "13"
 
-
-
-    decoder = Json.utf8_with({ field_name_mapping: CamelCase })
+    #decoder = Json.utf8_with({ field_name_mapping: CamelCase })
 
     #year_respone = (fetch_year! { year })?
     #year_record = Decode.from_bytes(year_respone.body, decoder)?
@@ -24,23 +22,11 @@ store! = |db|
     ##month_response = (fetch_month! { year, month })?
     #month_record = Decode.from_bytes(month_response.body, decoder)?
 
-    #day_response = (fetch_day! { year, month, day })?
-    #day_record = Decode.from_bytes(day_response.body, decoder)?
-
-    #Stdout.write! (Inspect.to_str day_record)
-    #Stdout.write! ("store")
-    # DayStatistics
-    day_record : DayStatistics
-    day_record = { systemId: 1387806,
-                    year: 2026,
-                    month: 1,
-                    day: 13,
-                    generationValue: 0.0,
-                    incomeValue: 0.0,
-                    fullPowerHoursDay: 0.0,
-                    acceptDay: "20260113"
-                 }
-    Repository.insert_day_statistics! db day_record
+    day_response = (fetch_day! { year, month, day })?
+    day_record = Decode.from_bytes(day_response.body, Json.utf8)?
+    Stdout.write! "bla"
+    #Stdout.write! "${db} ${str}"
+    #Repository.insert_day_statistics! db day_record
 
 main! = |_args|
     db = "./out/solarman.db"
