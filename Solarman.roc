@@ -1,4 +1,4 @@
-module [Year, Month, Day, fetch_day!, fetch_month!, fetch_year!]
+module [DayStatistics, Year, Month, Day, fetch_day!, fetch_month!, fetch_year!]
 
 import pf.Http
 import pf.File
