@@ -1,7 +1,6 @@
 module [initialize!, insert_day_statistics!]
 
 import pf.Sqlite
-import Solarman
 
 # Database schema for Solarman data
 initialize! = |db_path|
@@ -165,19 +164,19 @@ insert_day_statistics! = |db_path, stats|
             path: db_path,
             query:
             """
-             INSERT OR REPLACE INTO day_statistics
-             (systemId, year, month, day, generationValue, incomeValue, fullPowerHoursDay, acceptDay)
-             VALUES (:systemId, :year, :month, :day, :generationValue, :incomeValue, :fullPowerHoursDay, :acceptDay)
+            INSERT OR REPLACE INTO day_statistics
+            (systemId, year, month, day, generationValue, incomeValue, fullPowerHoursDay, acceptDay)
+            VALUES (:systemId, :year, :month, :day, :generationValue, :incomeValue, :fullPowerHoursDay, :acceptDay)
             """,
             bindings: [
-                { name: ":systemId", value: I64(stats.systemId) },
-                { name: ":year", value: I64(stats.year) },
-                { name: ":month", value: I64(stats.month) },
-                { name: ":day", value: I64(stats.day) },
-                { name: ":generationValue", value: F64(stats.generationValue) },
-                { name: ":incomeValue", value: F64(stats.incomeValue) },
-                { name: ":fullPowerHoursDay", value: F64(stats.fullPowerHoursDay) },
-                { name: ":acceptDay", value: String(stats.acceptDay) },
+                { name: ":systemId", value: stats.systemId },
+                { name: ":year", value: stats.year },
+                { name: ":month", value: stats.month },
+                { name: ":day", value: stats.day },
+                { name: ":generationValue", value: stats.generationValue },
+                { name: ":incomeValue", value: stats.incomeValue },
+                { name: ":fullPowerHoursDay", value: stats.fullPowerHoursDay },
+                { name: ":acceptDay", value: stats.acceptDay },
             ],
         },
     )
@@ -193,14 +192,14 @@ insert_day_record! = |db_path, stats_id, record|
              VALUES (:stats_id, :systemId, :acceptDay, :acceptMonth, :generationPower, :dateTime, :generationCapacity, :timeZoneOffset)
             """,
             bindings: [
-                { name: ":stats_id", value: I64(stats_id) },
-                { name: ":systemId", value: I64(record.systemId) },
-                { name: ":acceptDay", value: I64(record.acceptDay) },
-                { name: ":acceptMonth", value: I64(record.acceptMonth) },
-                { name: ":generationPower", value: F64(record.generationPower) },
-                { name: ":dateTime", value: F64(record.dateTime) },
-                { name: ":generationCapacity", value: F64(record.generationCapacity) },
-                { name: ":timeZoneOffset", value: I64(record.timeZoneOffset) },
+                { name: ":stats_id", value: stats_id },
+                { name: ":systemId", value: record.systemId },
+                { name: ":acceptDay", value: record.acceptDay },
+                { name: ":acceptMonth", value: record.acceptMonth },
+                { name: ":generationPower", value: record.generationPower },
+                { name: ":dateTime", value: record.dateTime },
+                { name: ":generationCapacity", value: record.generationCapacity },
+                { name: ":timeZoneOffset", value: record.timeZoneOffset },
             ],
         },
     )
@@ -217,13 +216,13 @@ insert_month_statistics! = |db_path, stats|
              VALUES (:systemId, :year, :month, :day, :generationValue, :incomeValue, :fullPowerHoursDay)
             """,
             bindings: [
-                { name: ":systemId", value: I64(stats.systemId) },
-                { name: ":year", value: I64(stats.year) },
-                { name: ":month", value: I64(stats.month) },
-                { name: ":day", value: I64(stats.day) },
-                { name: ":generationValue", value: F64(stats.generationValue) },
-                { name: ":incomeValue", value: F64(stats.incomeValue) },
-                { name: ":fullPowerHoursDay", value: F64(stats.fullPowerHoursDay) },
+                { name: ":systemId", value: stats.systemId },
+                { name: ":year", value: stats.year },
+                { name: ":month", value: stats.month },
+                { name: ":day", value: stats.day },
+                { name: ":generationValue", value: stats.generationValue },
+                { name: ":incomeValue", value: stats.incomeValue },
+                { name: ":fullPowerHoursDay", value: stats.fullPowerHoursDay },
             ],
         },
     )
@@ -239,15 +238,15 @@ insert_month_record! = |db_path, stats_id, record|
              VALUES (:stats_id, :systemId, :year, :month, :day, :generationValue, :incomeValue, :fullPowerHoursDay, :acceptDay)
             """,
             bindings: [
-                { name: ":stats_id", value: I64(stats_id) },
-                { name: ":systemId", value: I64(record.systemId) },
-                { name: ":year", value: I64(record.year) },
-                { name: ":month", value: I64(record.month) },
-                { name: ":day", value: I64(record.day) },
-                { name: ":generationValue", value: F64(record.generationValue) },
-                { name: ":incomeValue", value: F64(record.incomeValue) },
-                { name: ":fullPowerHoursDay", value: F64(record.fullPowerHoursDay) },
-                { name: ":acceptDay", value: String(record.acceptDay) },
+                { name: ":stats_id", value: stats_id },
+                { name: ":systemId", value: record.systemId },
+                { name: ":year", value: record.year },
+                { name: ":month", value: record.month },
+                { name: ":day", value: record.day },
+                { name: ":generationValue", value: record.generationValue },
+                { name: ":incomeValue", value: record.incomeValue },
+                { name: ":fullPowerHoursDay", value: record.fullPowerHoursDay },
+                { name: ":acceptDay", value: record.acceptDay },
             ],
         },
     )
@@ -263,13 +262,13 @@ insert_year_statistics! = |db_path, stats|
              VALUES (:systemId, :year, :month, :day, :generationValue, :incomeValue, :fullPowerHoursDay)
             """,
             bindings: [
-                { name: ":systemId", value: I64(stats.systemId) },
-                { name: ":year", value: I64(stats.year) },
-                { name: ":month", value: I64(stats.month) },
-                { name: ":day", value: I64(stats.day) },
-                { name: ":generationValue", value: F64(stats.generationValue) },
-                { name: ":incomeValue", value: F64(stats.incomeValue) },
-                { name: ":fullPowerHoursDay", value: F64(stats.fullPowerHoursDay) },
+                { name: ":systemId", value: stats.systemId },
+                { name: ":year", value: stats.year },
+                { name: ":month", value: stats.month },
+                { name: ":day", value: stats.day },
+                { name: ":generationValue", value: stats.generationValue },
+                { name: ":incomeValue", value: stats.incomeValue },
+                { name: ":fullPowerHoursDay", value: stats.fullPowerHoursDay },
             ],
         },
     )
@@ -285,14 +284,14 @@ insert_year_record! = |db_path, stats_id, record|
              VALUES (:stats_id, :systemId, :year, :month, :day, :generationValue, :incomeValue, :fullPowerHoursDay)
             """,
             bindings: [
-                { name: ":stats_id", value: I64(stats_id) },
-                { name: ":systemId", value: I64(record.systemId) },
-                { name: ":year", value: I64(record.year) },
-                { name: ":month", value: I64(record.month) },
-                { name: ":day", value: I64(record.day) },
-                { name: ":generationValue", value: F64(record.generationValue) },
-                { name: ":incomeValue", value: F64(record.incomeValue) },
-                { name: ":fullPowerHoursDay", value: F64(record.fullPowerHoursDay) },
+                { name: ":stats_id", value: stats_id },
+                { name: ":systemId", value: record.systemId },
+                { name: ":year", value: record.year },
+                { name: ":month", value: record.month },
+                { name: ":day", value: record.day },
+                { name: ":generationValue", value: record.generationValue },
+                { name: ":incomeValue", value: record.incomeValue },
+                { name: ":fullPowerHoursDay", value: record.fullPowerHoursDay },
             ],
         },
     )

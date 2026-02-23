@@ -3,14 +3,11 @@ app [main!] {
     json: "https://github.com/lukewilliamboswell/roc-json/releases/download/0.13.0/RqendgZw5e1RsQa3kFhgtnMP8efWoqGRsAvubx4-zus.tar.br",
 }
 
-import pf.Stdout
 import json.Json
 import Solarman exposing [Year, Month, Day, fetch_day!, fetch_month!, fetch_year!]
 import Repository exposing [initialize!]
 
-main! = |_args|
-    db = "./out/solarman.db"
-    (Repository.initialize! db)?
+store! = |db|
 
     year = "2026"
     month = "1"
@@ -28,6 +25,12 @@ main! = |_args|
     day_record = Decode.from_bytes(day_response.body, decoder)?
 
     Repository.insert_day_statistics! db day_record |> dbg
+
+main! = |_args|
+    db = "./out/solarman.db"
+    (Repository.initialize! db)
+    #? |> |_| store! db
+
 # Stdout.line!("Year ${year_record}")?
 # Stdout.line!("Month ${month_record}")?
 # Stdout.line!("Day ${day_record}")
