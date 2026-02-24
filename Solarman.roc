@@ -1,4 +1,4 @@
-module [DayStatistics, Year, Month, Day, fetch_day!, fetch_month!, fetch_year!]
+module [DayResponse, DayStatistics, Year, Month, Day, fetch_day!, fetch_month!, fetch_year!]
 
 import pf.Http
 import pf.File
@@ -35,6 +35,11 @@ fetch_day! = |{ year, month, day }|
     fetch! "https://home.solarmanpv.com/maintain-s/history/power/1387806/record?year=${year}&month=${month}&day=${day}"
 
 # Day structure - contains detailed records for each timestamp
+DayResponse : {
+    statistics : DayStatistics,
+    records : [DayRecord],
+}
+
 DayStatistics : {
     systemId : I64,
     year : I64,

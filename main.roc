@@ -4,7 +4,7 @@ app [main!] {
 }
 
 import json.Json
-import Solarman exposing [DayStatistics, Year, Month, Day, fetch_day!, fetch_month!, fetch_year!]
+import Solarman exposing [DayResponse, DayStatistics, Year, Month, Day, fetch_day!, fetch_month!, fetch_year!]
 import Repository exposing [initialize!]
 import pf.Stdout
 
@@ -14,24 +14,19 @@ store! = |db|
     month = "1"
     day = "13"
 
-    #decoder = Json.utf8_with({ field_name_mapping: CamelCase })
+    # decoder = Json.utf8_with({ field_name_mapping: CamelCase })
 
-    #year_respone = (fetch_year! { year })?
-    #year_record = Decode.from_bytes(year_respone.body, decoder)?
+    # year_respone = (fetch_year! { year })?
+    # year_record = Decode.from_bytes(year_respone.body, decoder)?
 
-    ##month_response = (fetch_month! { year, month })?
-    #month_record = Decode.from_bytes(month_response.body, decoder)?
+    ## month_response = (fetch_month! { year, month })?
+    # month_record = Decode.from_bytes(month_response.body, decoder)?
 
     day_response = (fetch_day! { year, month, day })?
+
+    day_record : DayResponse
     day_record = Decode.from_bytes(day_response.body, Json.utf8)?
-    Stdout.write! "bla"
-    #Stdout.write! "${db} ${str}"
-    #Repository.insert_day_statistics! db day_record
 
 main! = |_args|
     db = "./out/solarman.db"
     (Repository.initialize! db) |> |_| store! db
-
-# Stdout.line!("Year ${year_record}")?
-# Stdout.line!("Month ${month_record}")?
-# Stdout.line!("Day ${day_record}")
