@@ -4,7 +4,7 @@ app [main!] {
 }
 
 import json.Json
-import Solarman exposing [DayResponse, DayStatistics, Year, Month, Day, fetch_day!, fetch_month!, fetch_year!]
+import Solarman exposing [DayStatistics, Year, Month, Day, fetch_day!, fetch_month!, fetch_year!]
 import Repository exposing [initialize!]
 import pf.Stdout
 
@@ -24,7 +24,7 @@ store! = |db|
 
     day_response = (fetch_day! { year, month, day })?
 
-    day_record : DayResponse
+    day_record : Day
     day_record = Decode.from_bytes(day_response, Json.utf8)?
 
     Stdout.write! (Inspect.to_str day_record)
