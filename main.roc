@@ -4,7 +4,8 @@ app [main!] {
 }
 
 import json.Json
-import Solarman exposing [DayStatistics, Year, Month, Day, fetch_day!, fetch_month!, fetch_year!]
+import Solarman exposing [fetch_day!, fetch_month!, fetch_year!]
+import Model exposing [Day]
 import Repository exposing [initialize!]
 import pf.Stdout
 
