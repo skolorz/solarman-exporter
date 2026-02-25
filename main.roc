@@ -4,15 +4,14 @@ app [main!] {
 }
 
 import json.Json
-import Solarman exposing [fetch_day!, fetch_month!, fetch_year!]
+import Solarman exposing [fetch_day!]
 import Model exposing [Day]
 import Repository exposing [initialize!, insert_day_statistics!]
-import pf.Stdout
 
 store! = |db|
 
-    year = "2026"
-    month = "1"
+    year = "2025"
+    month = "7"
     day = "13"
 
     # decoder = Json.utf8_with({ field_name_mapping: CamelCase })
@@ -27,10 +26,10 @@ store! = |db|
 
     day_record : Day
     day_record = Decode.from_bytes(day_response, Json.utf8)?
-
-    insert_day_statistics! db day_record
+    dbg "day decoded"
+    insert_day_statistics! db day_record |> dbg
 
 main! = |_args|
     db = "./out/solarman.db"
-    (Repository.initialize! db)?
+    (initialize! db)?
     store! db

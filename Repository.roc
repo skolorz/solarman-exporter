@@ -156,6 +156,7 @@ initialize! = |db_path|
 
 # Helper functions for inserting data
 insert_day_statistics! = |db_path, day|
+    dbg "insert_day_statistics!"
     prepared_query = Sqlite.prepare!(
         {
             path: db_path,
@@ -167,7 +168,7 @@ insert_day_statistics! = |db_path, day|
             """,
         },
     )?
-
+    dbg "prepared_query"
     stats = day.statistics
 
     Sqlite.execute_prepared!(
@@ -181,14 +182,14 @@ insert_day_statistics! = |db_path, day|
                 { name: ":generationValue", value: Real stats.generationValue },
                 { name: ":incomeValue", value: Real stats.incomeValue },
                 { name: ":fullPowerHoursDay", value: Real stats.fullPowerHoursDay },
-                { name: ":acceptDay", value: Integer stats.acceptDay },
+                { name: ":acceptDay", value: String stats.acceptDay },
             ],
         },
     )?
 
     records : List DayRecord
     records = day.records
-
+    dbg (List.len records)
     List.for_each_try! records (|r| insert_day_record! r db_path)
 
 insert_day_record! = |record, db_path|
@@ -199,7 +200,7 @@ insert_day_record! = |record, db_path|
             """
              INSERT OR REPLACE INTO day_records
              (systemId, acceptDay, acceptMonth, generationPower, dateTime, generationCapacity, timeZoneOffset)
-             VALUES (:stats_id, :systemId, :acceptDay, :acceptMonth, :generationPower, :dateTime, :generationCapacity, :timeZoneOffset)
+             VALUES (:systemId, :acceptDay, :acceptMonth, :generationPower, :dateTime, :generationCapacity, :timeZoneOffset)
             """,
             bindings: [
                 { name: ":systemId", value: Integer record.systemId },

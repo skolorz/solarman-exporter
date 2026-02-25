@@ -8,7 +8,7 @@ DayStatistics : {
     generationValue : F64,
     incomeValue : F64,
     fullPowerHoursDay : F64,
-    acceptDay : I64,
+    acceptDay : Str,
 }
 
 DayRecord : {
