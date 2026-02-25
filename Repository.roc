@@ -1,7 +1,6 @@
 module [initialize!, insert_day_statistics!]
 
 import pf.Sqlite
-import pf.Stdout
 
 # Database schema for Solarman data
 initialize! = |db_path|
