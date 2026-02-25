@@ -20,6 +20,8 @@ fetch! = |uri|
             timeout_ms: TimeoutMilliseconds(5000),
         },
     )
+    |> Result.map_ok |response| response.body
+    |> Result.map_err |_| FetchError
 
 # write_respone_to_file! = |response, out_file_name|
 #    body_str = (Str.from_utf8(response.body))?

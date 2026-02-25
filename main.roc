@@ -25,8 +25,11 @@ store! = |db|
     day_response = (fetch_day! { year, month, day })?
 
     day_record : DayResponse
-    day_record = Decode.from_bytes(day_response.body, Json.utf8)?
+    day_record = Decode.from_bytes(day_response, Json.utf8)?
+
+    Stdout.write! (Inspect.to_str day_record)
 
 main! = |_args|
     db = "./out/solarman.db"
-    (Repository.initialize! db) |> |_| store! db
+    (Repository.initialize! db)?
+    store! db
