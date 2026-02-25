@@ -1,7 +1,7 @@
 module [initialize!, insert_day_statistics!]
 
 import pf.Sqlite
-
+import Model exposing [DayRecord]
 # Database schema for Solarman data
 initialize! = |db_path|
     # Create tables for Day data
@@ -37,7 +37,6 @@ initialize! = |db_path|
                 """
                 CREATE TABLE IF NOT EXISTS day_records (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    statistics_id INTEGER NOT NULL,
                     systemId INTEGER NOT NULL,
                     acceptDay INTEGER NOT NULL,
                     acceptMonth INTEGER NOT NULL,
@@ -45,8 +44,7 @@ initialize! = |db_path|
                     dateTime REAL NOT NULL,
                     generationCapacity REAL NOT NULL,
                     timeZoneOffset INTEGER NOT NULL,
-                    FOREIGN KEY(statistics_id) REFERENCES day_statistics(id),
-                    UNIQUE(statistics_id, dateTime)
+                    UNIQUE(systemId, acceptDay, acceptMonth, dateTime)
                 );
                 """,
                 bindings: [],
@@ -157,49 +155,60 @@ initialize! = |db_path|
     )
 
 # Helper functions for inserting data
-
-insert_day_statistics! = |db_path, stats|
-    Sqlite.execute!(
+insert_day_statistics! = |db_path, day|
+    prepared_query = Sqlite.prepare!(
         {
             path: db_path,
             query:
             """
-            INSERT OR REPLACE INTO day_statistics
+            INSERT INTO day_statistics
             (systemId, year, month, day, generationValue, incomeValue, fullPowerHoursDay, acceptDay)
             VALUES (:systemId, :year, :month, :day, :generationValue, :incomeValue, :fullPowerHoursDay, :acceptDay)
             """,
+        },
+    )?
+
+    stats = day.statistics
+
+    Sqlite.execute_prepared!(
+        {
+            stmt: prepared_query,
             bindings: [
-                { name: ":systemId", value: stats.systemId },
-                { name: ":year", value: stats.year },
-                { name: ":month", value: stats.month },
-                { name: ":day", value: stats.day },
-                { name: ":generationValue", value: stats.generationValue },
-                { name: ":incomeValue", value: stats.incomeValue },
-                { name: ":fullPowerHoursDay", value: stats.fullPowerHoursDay },
-                { name: ":acceptDay", value: stats.acceptDay },
+                { name: ":systemId", value: Integer stats.systemId },
+                { name: ":year", value: Integer stats.year },
+                { name: ":month", value: Integer stats.month },
+                { name: ":day", value: Integer stats.day },
+                { name: ":generationValue", value: Real stats.generationValue },
+                { name: ":incomeValue", value: Real stats.incomeValue },
+                { name: ":fullPowerHoursDay", value: Real stats.fullPowerHoursDay },
+                { name: ":acceptDay", value: Integer stats.acceptDay },
             ],
         },
-    )
+    )?
 
-insert_day_record! = |db_path, stats_id, record|
+    records : List DayRecord
+    records = day.records
+
+    List.for_each_try! records (|r| insert_day_record! r db_path)
+
+insert_day_record! = |record, db_path|
     Sqlite.execute!(
         {
             path: db_path,
             query:
             """
              INSERT OR REPLACE INTO day_records
-             (statistics_id, systemId, acceptDay, acceptMonth, generationPower, dateTime, generationCapacity, timeZoneOffset)
+             (systemId, acceptDay, acceptMonth, generationPower, dateTime, generationCapacity, timeZoneOffset)
              VALUES (:stats_id, :systemId, :acceptDay, :acceptMonth, :generationPower, :dateTime, :generationCapacity, :timeZoneOffset)
             """,
             bindings: [
-                { name: ":stats_id", value: stats_id },
-                { name: ":systemId", value: record.systemId },
-                { name: ":acceptDay", value: record.acceptDay },
-                { name: ":acceptMonth", value: record.acceptMonth },
-                { name: ":generationPower", value: record.generationPower },
-                { name: ":dateTime", value: record.dateTime },
-                { name: ":generationCapacity", value: record.generationCapacity },
-                { name: ":timeZoneOffset", value: record.timeZoneOffset },
+                { name: ":systemId", value: Integer record.systemId },
+                { name: ":acceptDay", value: Integer record.acceptDay },
+                { name: ":acceptMonth", value: Integer record.acceptMonth },
+                { name: ":generationPower", value: Real record.generationPower },
+                { name: ":dateTime", value: Real record.dateTime },
+                { name: ":generationCapacity", value: Real record.generationCapacity },
+                { name: ":timeZoneOffset", value: Integer record.timeZoneOffset },
             ],
         },
     )

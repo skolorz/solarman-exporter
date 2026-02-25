@@ -6,7 +6,7 @@ app [main!] {
 import json.Json
 import Solarman exposing [fetch_day!, fetch_month!, fetch_year!]
 import Model exposing [Day]
-import Repository exposing [initialize!]
+import Repository exposing [initialize!, insert_day_statistics!]
 import pf.Stdout
 
 store! = |db|
@@ -28,7 +28,7 @@ store! = |db|
     day_record : Day
     day_record = Decode.from_bytes(day_response, Json.utf8)?
 
-    Stdout.write! (Inspect.to_str day_record)
+    insert_day_statistics! db day_record
 
 main! = |_args|
     db = "./out/solarman.db"

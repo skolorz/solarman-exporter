@@ -1,4 +1,4 @@
-module [DayStatistics, Year, Month, Day]
+module [DayRecord, DayStatistics, Year, Month, Day]
 
 DayStatistics : {
     systemId : I64,
@@ -8,7 +8,7 @@ DayStatistics : {
     generationValue : F64,
     incomeValue : F64,
     fullPowerHoursDay : F64,
-    acceptDay : Str,
+    acceptDay : I64,
 }
 
 DayRecord : {
