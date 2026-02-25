@@ -10,10 +10,7 @@ import Repository exposing [initialize!, insert_day_statistics!]
 
 store! = |db|
 
-    year = "2025"
-    month = "7"
-    day = "13"
-
+    day = { year: "2025", month: "7", day: "13" }
     # decoder = Json.utf8_with({ field_name_mapping: CamelCase })
 
     # year_respone = (fetch_year! { year })?
@@ -22,7 +19,7 @@ store! = |db|
     ## month_response = (fetch_month! { year, month })?
     # month_record = Decode.from_bytes(month_response.body, decoder)?
 
-    day_response = (fetch_day! { year, month, day })?
+    day_response = (fetch_day! day)?
 
     day_record : Day
     day_record = Decode.from_bytes(day_response, Json.utf8)?
